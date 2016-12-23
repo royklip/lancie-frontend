@@ -53,6 +53,7 @@ global.config = {
 // A task should return either a WriteableStream or a Promise
 const clean = require('./gulp-tasks/clean.js');
 const project = require('./gulp-tasks/project.js');
+const ensureLazyFragments = require('./gulp-tasks/ensure-lazy-fragments.js');
 
 function minify() {
   return htmlMinifier({
@@ -137,6 +138,13 @@ gulp.task('ensure-images-optimized', () =>
     } else {
       resolve();
     }
+  })
+);
+
+gulp.task('ensure-lazy-fragments', () =>
+  new Promise((resolve, reject) => {
+    ensureLazyFragments();
+    resolve();
   })
 );
 
