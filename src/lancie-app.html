@@ -1,15 +1,16 @@
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
 <link rel="import" href="lancie-content.html">
 <link rel="import" href="lancie-layout/lancie-layout.html">
-
 <link rel="import" href="lancie-footer/lancie-footer.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <dom-module id="lancie-app">
   <template>
     <style include="iron-flex iron-flex-alignment"></style>
     <style>
       :host {
-        display: block;
         --primary-color: #1a2b43;
         --secondary-color: #ffe574;
       }
@@ -18,7 +19,11 @@
         @apply(--layout-flex);
       }
     </style>
-    <lancie-layout route="{{page}}">
+
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="/:page" data="{{page}}"></app-route>
+
+    <lancie-layout page="{{page}}">
 
       <lancie-content page="{{page}}"></lancie-content>
       <lancie-footer></lancie-footer>
@@ -26,11 +31,14 @@
     </lancie-layout>
   </template>
   <script>
-  (function() {
-    'use strict';
+  'use strict';
 
+  (function() {
     Polymer({
-      is: 'lancie-app'
+      is: 'lancie-app',
+      properties: {
+        page: Object,
+      },
     });
   })();
   </script>
